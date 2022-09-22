@@ -1,2 +1,2 @@
 # SSA-SLEPc
-Singular Spectrum Analysis  with SLEPc
+Singular Spectrum Analysis  with SLEPc.
