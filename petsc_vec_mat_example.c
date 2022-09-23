@@ -1,24 +1,25 @@
 //Based on https://www.youtube.com/watch?v=kP7DAOrqECo
 # include <petsc.h>
+#include <slepcsvd.h>
 
-int main{int argc, char **argv}
+int main(int argc, char **argv)
 {
     // Create PETSc Vector Example
-    Vec b;
-    int j[4] = {0, 1, 2, 3};
-    double ab[4] = {7.0, 1.0, 2.0, 4.0};
+    // Vec b;
+    // int j[4] = {0, 1, 2, 3};
+    // double ab[4] = {7.0, 1.0, 2.0, 4.0};
 
     PetscInitialize(&argc, &argv, NULL, "Create vector AND matrix");
 
-    VecCreate(PETSC_COMM_WORLD, &b);
-    VecSetSizes(b, PETSC_DECIDE, 4);
-    VecSetFromOptions(b);
-    VecSetValues(b, 4, j, ab, INSERT_VALUES);
-    VesAssemblyBegin(b); VecAssemblyEnd(b);
+    // VecCreate(PETSC_COMM_WORLD, &b);
+    // VecSetSizes(b, PETSC_DECIDE, 4);
+    // VecSetFromOptions(b);
+    // VecSetValues(b, 4, j, ab, INSERT_VALUES);
+    // VecAssemblyBegin(b); VecAssemblyEnd(b);
 
-    VecView(b, PETSC_VIEWER_STDOUT_WORLD);
+    // VecView(b, PETSC_VIEWER_STDOUT_WORLD);
 
-    VecDestroy(b);
+    // VecDestroy(&b);
 
     // Create PETSc Matrix example
     Mat A;
@@ -33,14 +34,15 @@ int main{int argc, char **argv}
     MatSetSizes(A, PETSC_DECIDE, PETSC_DECIDE, 4, 4);
     MatSetFromOptions(A);
     MatSetUp(A);
-    for (1 = 0; i<4; i++){
-        MatSetValues(A, &i, 4, jA, aA[i], INSERT_VALUES);
+    for (i = 0; i<4; i++){
+        MatSetValues(A, 1, &i, 4, jA, aA[i], INSERT_VALUES);
     }
 
-    MatAssemblyBegin(A); MatAssemblyEnd(A);
+    MatAssemblyBegin(A, MAT_FINAL_ASSEMBLY); MatAssemblyEnd(A, MAT_FINAL_ASSEMBLY);
 
     MatView(A, PETSC_VIEWER_STDOUT_WORLD);
 
-    MatDestroy(A);
+    MatDestroy(&A);
+
 
 }
